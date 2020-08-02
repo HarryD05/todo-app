@@ -1,0 +1,382 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+:root {
+  --background: rgb(51, 51, 51);
+  --text: rgb(255, 255, 255);
+  --opposite: rgb(0, 0, 0);
+  --primary-colour: #FEA82F;
+  --nav-background: rgb(34, 34, 34);
+  --nav-link-colour: #ffffff;
+  --nav-link-colour-hover: #b3b3b3;
+  --post-list-item-border: #e0e0e0;
+  --post-list-item-hover: #4d4d4d;
+  --post-list-item-date: #cecece;
+  --post-list-item-tag: #4f7bf3;
+
+  --nav-height: 80px;
+  --transition-duration: 0.5s;
+  --post-border-thick: 4px;
+  --post-border-thin: 1px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  background: var(--background);
+
+  height: 100%; 
+  overflow: hidden;
+
+  @media (max-width: 800px) { 
+    height: unset; 
+    overflow: auto;
+  }
+}
+
+.main-container {
+  width: 100%;
+}
+
+/* reset */
+* {
+  color: var(--text);
+  text-decoration: none;
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: lato;
+}
+
+button {
+  background: none;
+  outline: none;
+  color: var(--text);
+  border: 1px solid var(--text);
+  border-radius: 8px;
+  padding: 8px;
+  margin-top: 1rem;
+  width: 16rem;
+
+  &:hover {
+    background-color: var(--primary-colour);
+    color: var(--opposite);
+    cursor: pointer;
+    
+    transition: 0.25s ease-in-out;
+    -webkit-transition: 0.25s ease-in-out;
+  }
+}
+
+input, textarea {
+  outline: none;
+  border: 1px solid var(--text);
+  border-radius: 4px;
+  height: 1.5rem;
+  width: 16rem;
+  color: var(--opposite);
+}
+
+li {
+  margin-left: 1rem;
+}
+
+/* typography */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1rem;
+  margin-bottom: 0.7rem;
+  line-height: initial;
+}
+
+h1 {
+  margin-top: 0;
+  padding-left: 0.5rem;
+  border-left: var(--post-border-thick) solid var(--primary-colour);
+  color: var(--primary-colour);
+}
+
+p {
+  margin: 1rem 0;
+}
+
+/* Content */
+.content {
+  max-width: 800px; /*Scales below 800px but scales maximum of 800 */
+  height: 100vh;
+  margin: var(--nav-height) auto 0 auto; /* nothing top bottom auto on right left*/
+  /*(background: var(--background);*/
+  padding: 1rem;
+}
+
+.primary {
+  color: rgb(116, 212, 250);
+}
+
+.danger {
+  color: rgb(228, 76, 76);
+}
+
+/* navbar */
+nav {
+  height: var(--nav-height);
+  width: 100%;
+  
+  background: var(--nav-background);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  -webkit-transition: background var(--transition-duration) ease-in-out;
+  transition: background var(--transition-duration) ease-in-out;
+
+  position: fixed;
+  top: 0;
+
+
+  .centered {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .large-brand {
+    grid-area: logo;
+    height: 72px;
+    margin: 0 1rem;
+  }
+  .small-brand {
+    grid-area: logo;
+    height: 72px;
+    margin: 0 1rem;
+  }
+
+  .li-item, .logout {
+    font-size: 1.2rem;
+    text-align: center;
+    color: var(--nav-link-colour);
+    padding: 8px;
+    font-weight: 600;
+    border-left: var(--post-border-thick) rgb(255, 255, 255) solid;
+    border-right: var(--post-border-thick) rgb(255, 255, 255) solid;
+
+    width: 92px;
+
+    &:hover {
+      color: var(--primary-colour);
+      cursor: pointer;
+      border-left-color: var(--primary-colour);
+      border-right-color: var(--primary-colour);
+
+      -webkit-transition: var(--transition-duration) ease-in-out;
+      transition: var(--transition-duration) ease-in-out;
+    } 
+  }
+  
+}
+
+.centered-content {
+  text-align: center;
+}
+
+.todo-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.todo-list::-webkit-scrollbar-thumb {
+  background: var(--text);
+  border-radius: 8px;
+}
+
+
+.todo-content {
+  display: grid;
+  grid-template-areas: "list form";
+  grid-template-columns:  70% 30%;
+
+  .todo-list {
+    grid-area: list;
+
+    height: 80vh;
+    overflow: hidden;
+    overflow-y: scroll;
+  
+    padding: 1rem 1rem 0 1rem;  
+    border-radius: 8px;
+    border: solid 1px var(--text);
+
+    .todo-item {
+      min-height: 50px;
+      border: dashed 1px var(--text);
+      border-radius: 5px;
+      margin-bottom: 0.75rem;
+      padding: 0.5rem;
+      width: 100%;
+
+      display: grid;
+      grid-template-areas: "info"
+                          "buttons";
+
+      .info {
+        grid-area: info;
+        justify-self: start;
+        
+      }
+
+      .completed {
+        text-decoration: line-through;
+      }
+
+      .archived {
+        color: orangered;
+      }
+
+      .buttons {
+        width: 100%;
+        grid-area: buttons;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        margin-top: 1rem;
+        padding-right: 1rem;
+
+        .todo-btn {
+          width: 100%;
+          height: unset;
+          margin: 0 0 0 0.5rem;
+          //flex-direction: column;
+        }
+
+        .delete-btn:hover {
+          background-color: #ff6565;
+        }
+      }
+    }
+  }
+
+  .todo-form {
+    grid-area: form;
+    margin-left: 1rem;
+
+    button {
+      margin-bottom: 0.5rem;
+    }
+
+    .option-buttons {
+      display: grid;
+      grid-template-rows: none;
+      grid-template-columns: 0.333fr 0.333fr 0.333fr;
+      width: 16rem;
+      margin-bottom: 0.2rem;
+
+      button {
+        margin: 0;
+        width: unset;
+      }
+    }
+
+    .todo-type {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.message {
+  height: 32px;
+  border: var(--post-border-thin) solid var(--text);
+  padding: 4px;
+  width: 16rem;
+  border-radius: 5px;
+  margin: auto;
+  text-align: center;
+
+  @media (max-width: 800px) {
+    margin: 0;
+  }
+}
+
+.home-content {
+  .highlighted {
+    color: #FEA82F;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+}
+
+.users {
+  .user-list {
+    width: unset;
+    grid-area: list;
+    padding-right: 1rem;
+
+    .user-item {
+      min-height: 50px;
+      border: dashed var(--post-border-thin) var(--text);
+      border-radius: 5px;
+      margin-bottom: 0.75rem;
+      padding: 0.5rem;
+
+      display: grid;
+      grid-template-areas: "info stats buttons";
+      grid-template-columns: 0.3fr 0.3fr 0.4fr;
+
+      .info {
+        grid-area: info;
+      }
+
+      .user-stats {
+        grid-area: stats;
+      }
+
+      .buttons {
+        grid-area: buttons;
+        display: flex;
+        justify-content: flex-end;
+
+        .user-btn {
+          width: 48px;
+          height: unset;
+          margin: 0 0 0 0.5rem;
+          display: flex;
+          align-content: cente;
+          justify-content: center;
+        }
+
+        .delete-btn:hover {
+          background-color: #ff6565;
+        }
+      }
+    }
+  }
+}
+
+
+/* media queries */
+@media (max-width: 800px) {
+  .todo-content {
+    display: grid;
+    grid-template-areas: "form"
+                         "list";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+
+    margin-right: 20px;
+
+    .todo-form {
+      width: 100vw;
+      text-align: left;
+      margin: 0 0 1rem 0;
+    }
+
+    .todo-list {
+      border: none;
+      width: 100%;
+      padding: 0;
+      padding-right: 3rem;
+      margin: 0;
+      //margin-right: 2rem;
+
+      height: unset;
+      overflow: auto;
+      overflow-y: auto;
+    }
+  }
+}
