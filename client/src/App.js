@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { HashRouter as Router, Route } from 'react-router-dom'
 
 //Components
 import Navbar from './Components/Navbar';
@@ -16,7 +16,7 @@ import UnprivateRoute from './HOCs/UnprivateRoute';
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <Router>
         <Navbar />
 
         <div className="content">
@@ -26,7 +26,7 @@ function App() {
           <PrivateRoute exact path='/todos' roles={['user', 'admin']} component={Todos} />
           <PrivateRoute exact path='/admin' roles={['admin']} component={Admin} />
         </div>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
