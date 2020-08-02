@@ -2,6 +2,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose'); //For databases
+const path = require('path');
 require('dotenv').config(); //.env file
 
 //IMPORTING MODELS
@@ -27,6 +28,13 @@ mongoose.connect(
 //SETTING UP ROUTES
 app.use('/user', require('./routes/userRoutes'));
 app.use('/todo', require('./routes/todoRoutes'));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  })
+}
 
 //SETTING UP SERVER
 console.log('Starting server');

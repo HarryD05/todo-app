@@ -4,7 +4,9 @@
   "description": "Site to record your todo list",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "dev": "concurrently \"npm run development\" \"cd client && npm start\""
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
     "mongoose": "^5.9.27",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7"
   }
 }
